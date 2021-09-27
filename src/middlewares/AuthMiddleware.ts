@@ -5,6 +5,7 @@ export const auth = (req: Request, res: Response, next: NextFunction): any => {
 
   if (!login) {
     return res.send("unauthentication");
+  } else {
+    next();
   }
-  next();
 };
