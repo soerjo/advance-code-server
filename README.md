@@ -8,3 +8,4 @@
 - crud
 - postgre db
 - realtime chat
+- socket io
