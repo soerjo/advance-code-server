@@ -3,9 +3,11 @@ import morgan from "morgan";
 import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
+import { config as dotenv } from "dotenv";
 
 //routers
 import UserRoutes from "./routers/UserRoutes";
+import AuthRoutes from "./routers/AuthRoutes";
 
 class App {
   public app: Application;
@@ -14,6 +16,7 @@ class App {
     this.app = express();
     this.plugins();
     this.routes();
+    dotenv();
   }
 
   protected plugins(): void {
@@ -30,6 +33,7 @@ class App {
     });
 
     this.app.use("/api/v1/users", UserRoutes);
+    this.app.use("/api/v1/auth", AuthRoutes);
   }
 }
 
@@ -38,4 +42,5 @@ const app = new App().app;
 
 app.listen(port, () => {
   console.log("aplikasi berjalan di port: " + port);
+  console.log(process.env.DB_USER);
 });
